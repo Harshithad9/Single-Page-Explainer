@@ -30,4 +30,5 @@ No installation required - this is a static HTML/CSS project. Simply:
    git clone https://github.com/Harshithad9/Single-Page-Explainer.git
 ## Live Demo
 
-➡️ [View the live timeline here](https://your-project-name.netlify.app)
+➡️ [View the live timeline here](https://single-page-explainer.vercel.app
+)
