@@ -28,3 +28,6 @@ No installation required - this is a static HTML/CSS project. Simply:
 1. Clone the repository:
    ```bash
    git clone 
+## Live Demo
+
+➡️ [View the live timeline here](https://your-project-name.netlify.app)
