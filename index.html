@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025: The Brink of War</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: #0a0a0a;
+            margin: 0;
+            padding: 0;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ff5252;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+        
+        .conflict-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .event {
+            display: flex;
+            align-items: center;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .action {
+            background: rgba(255, 82, 82, 0.1);
+            border-left: 5px solid #ff5252;
+            padding: 25px;
+            border-radius: 0 8px 8px 0;
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(255, 82, 82, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .action:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(255, 82, 82, 0.3);
+        }
+        
+        .reaction {
+            background: rgba(66, 165, 245, 0.1);
+            border-right: 5px solid #42a5f5;
+            padding: 25px;
+            border-radius: 8px 0 0 8px;
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(66, 165, 245, 0.2);
+            text-align: right;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .reaction:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(66, 165, 245, 0.3);
+        }
+        
+        .arrow {
+            width: 60px;
+            text-align: center;
+            font-size: 28px;
+            color: #ff5252;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 0 10px rgba(255, 82, 82, 0.7);
+        }
+        
+        h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .action h3 {
+            color: #ff5252;
+            text-shadow: 0 0 5px rgba(255, 82, 82, 0.3);
+        }
+        
+        .reaction h3 {
+            color: #42a5f5;
+            text-shadow: 0 0 5px rgba(66, 165, 245, 0.3);
+        }
+        
+        .date {
+            font-weight: 500;
+            color: #aaa;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        .casualty-tag {
+            display: inline-block;
+            background: #ff5252;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .weapon-icon {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            margin: 0 5px;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.5));
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        @keyframes countUp {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff5252);
+            animation: countUp 2s ease-out forwards;
+            opacity: 0.7;
+        }
+        
+        .reaction .progress-bar {
+            background: linear-gradient(90deg, transparent, #42a5f5);
+        }
+        
+        .map-container {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+        
+        .quotes-section {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 87, 34, 0.1) 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 30px;
+            color: #f5f5f5;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -15px;
+            font-size: 4em;
+            color: rgba(255, 152, 0, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: 500;
+            color: #ffab40;
+            margin-top: 10px;
+        }
+        
+        .current-status {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 8px;
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            box-shadow: 0 0 20px rgba(255, 82, 82, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .current-status::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 82, 82, 0.1) 50%, 
+                transparent 100%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .casualty-counter {
+            color: #ff5252;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(255, 82, 82, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .event {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+                margin: 15px 0;
+            }
+            
+            .action, .reaction {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .reaction {
+                text-align: center;
+            }
+            
+            .current-status {
+                width: 100%;
+            }
+        }
+        
+        /* Animation for casualty counter */
+        @keyframes countUpFade {
+            0% { opacity: 0; content: "0"; }
+            10% { opacity: 1; content: "5"; }
+            20% { content: "10"; }
+            30% { content: "15"; }
+            40% { content: "20"; }
+            50% { content: "25"; }
+            60% { content: "30"; }
+            70% { content: "35"; }
+            80% { content: "40"; }
+            90% { content: "45"; }
+            100% { content: "80"; }
+        }
+        
+        .casualty-counter::after {
+            content: "80";
+            animation: countUpFade 3s forwards;
+        }
+        
+        .nuclear-alert {
+            animation: nuclearPulse 2s infinite;
+            color: #ffeb3b;
+        }
+        
+        @keyframes nuclearPulse {
+            0% { opacity: 0.3; text-shadow: 0 0 5px #ffeb3b; }
+            50% { opacity: 1; text-shadow: 0 0 15px #ffeb3b; }
+            100% { opacity: 0.3; text-shadow: 0 0 5px #ffeb3b; }
+        }
+        /* === NEW SALUTE SECTION STYLES === */
+        .salute-section {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 3px solid #d32f2f;
+        }
+        .salute-emoji {
+            font-size: 50px;
+            margin: 10px 0;
+        }
+        .salute-text {
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2025: The Brink of War</h1>
+        <div class="subtitle">A Tense Chronology of India-Pakistan Military Escalation</div>
+        
+        <div class="conflict-flow">
+            <!-- Initial Attack -->
+            <div class="event">
+                <div class="action">
+                    <div class="progress-bar"></div>
+                    <div class="date">April 22, 2025</div>
+                    <h3>Deadly Terror Strike <span class="casualty-tag">26 killed</span></h3>
+                    <p>Pakistan-based militants launch devastating attack on civilian targets, marking the deadliest incident in years</p>
+                    <div class="map-container">
+                        <div class="map-overlay">Attack Zone - Classified</div>
+                    </div>
+                </div>
+                <div class="arrow">⚡</div>
+                <div class="reaction">
+                    <div class="progress-bar"></div>
+                    <div class="date">April 23-30</div>
+                    <h3>India's Strategic Response</h3>
+                    <p>• Presents irrefutable evidence to international community<br>• Issues 72-hour ultimatum<br>• Military mobilization at unprecedented scale</p>
+                </div>
+            </div>
+            
+            <!-- Operation Sindoor -->
+            <div class="event">
+                <div class="action">
+                    <div class="progress-bar"></div>
+                    <div class="date">May 6, 2025</div>
+                    <h3>Operation Red Dawn <img src="https://img.icons8.com/ios-filled/50/000000/jet-fighter.png" class="weapon-icon"></h3>
+                    <p>Indian Air Force executes precision strikes deep behind enemy lines using advanced guided munitions</p>
+                    <div class="map-container">
+                        <div class="map-overlay">Operation Area - Top Secret</div>
+                    </div>
+                </div>
+                <div class="arrow">💥</div>
+                <div class="reaction">
+                    <div class="progress-bar"></div>
+                    <div class="date">May 6-7</div>
+                    <h3>Pakistan's Counterattack</h3>
+                    <p>• Claims aerial victories (disputed)<br>• Heavy artillery bombardment<br>• First use of combat drones in the conflict</p>
+                </div>
+            </div>
+            
+            <!-- Escalation -->
+            <div class="event">
+                <div class="action">
+                    <div class="progress-bar"></div>
+                    <div class="date">May 7-9</div>
+                    <h3>Indian Counteroffensive <img src="https://img.icons8.com/ios-filled/50/000000/artillery-shell.png" class="weapon-icon"></h3>
+                    <p>Systematic elimination of militant infrastructure with minimal collateral damage</p>
+                </div>
+                <div class="arrow">🔥</div>
+                <div class="reaction">
+                    <div class="progress-bar"></div>
+                    <div class="date">May 8-10</div>
+                    <h3>Pakistan's Dangerous Gambit</h3>
+                    <p>• Deliberate targeting of civilian areas <span class="casualty-tag">15 killed</span><br>• Nuclear forces placed on alert<br>• Cyber warfare escalates</p>
+                    <div class="map-container">
+                        <div class="map-overlay">Conflict Hotspots - Restricted</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Current Status -->
+            <div class="event" style="justify-content: center;">
+                <div class="current-status">
+                    <h3 style="color: #ff5252; margin-top: 0;">Dangerous Standoff (May 10, 2025)</h3>
+                    <p>• Continuous exchange of fire along the frontier<br>• <span class="casualty-counter">80</span>+ confirmed casualties<br>• Global powers attempt mediation<br>• <span class="nuclear-alert">Nuclear forces at DEFCON 2</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quotes Section -->
+        <div class="quotes-section">
+            <h2 style="text-align: center; color: #ffab40; margin-top: 0; text-shadow: 0 0 5px rgba(255, 171, 64, 0.3);">India's Strategic Resolve</h2>
+            
+            <div class="quote">
+                "The 2025 operations demonstrated India's new doctrine of proactive defense - the ability to strike surgically with overwhelming force while maintaining strategic restraint. A masterclass in modern warfare."
+                <div class="quote-author">— Defense Analyst, Stratfor</div>
+            </div>
+            
+            <div class="quote">
+                "India's calibrated response has rewritten the rules of engagement in asymmetric conflicts. The world has taken note of both our military capability and moral responsibility."
+                <div class="quote-author">— National Security Advisor</div>
+            </div>
+            
+            <div class="quote">
+                "In the shadow of nuclear escalation, India's leadership displayed Churchillian resolve combined with Gandhian restraint - a paradoxical combination that may have prevented all-out war."
+                <div class="quote-author">— International Relations Professor, Harvard</div>
+            </div>
+        </div>
+        <div class="container">
+        <!-- [All your existing content remains unchanged] -->
+        
+        <!-- ===== NEW SALUTE SECTION ADDED AT THE END ===== -->
+        <div class="salute-section">
+            <div class="salute-emoji">🫡</div>
+            <div class="salute-text">WE SALUTE OUR BRAVE SOLDIERS</div>
+            <div class="salute-emoji">The brave soldiers who selflessly guard our nation with courage and honor.</div><br>JAI HIND</div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+        
+        
