@@ -27,7 +27,7 @@ No installation required - this is a static HTML/CSS project. Simply:
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/Harshithad9/Single-Page-Explainer.git
 ## Live Demo
 
 ➡️ [View the live timeline here](https://your-project-name.netlify.app)
